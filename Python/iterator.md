@@ -27,6 +27,30 @@ In the example above, we use "range" function. "range" creates an implicit seque
 	- "__iter__" method returns itself
 	- CANNOT be reset
 
++ Compare Iterator and Iterable:
+	
+	# Range is an iterable. 
+	class Range:
+		def __init__(self, stop):
+			self.stop = stop
+		def __iter__(self):
+			return range_iterator(self.stop)
+
+	# Range_Iterator is an iterator.
+	class Range_Iterator:
+		def __init__(self, stop):
+			self.stop = stop
+			self.cur = 0
+		def __iter__(self):
+			return self
+		def __next__(self):
+			if self.cur >= self.stop:
+				raise StopIteration
+			elem = self.cur
+			self.cur += 1
+			return elem
+
+
 + "for" statement:
 	- The "for" statement iterates through a iterable object.
 	======
@@ -38,7 +62,7 @@ In the example above, we use "range" function. "range" creates an implicit seque
 	- Then Execute <suite>
 
 + Generator:
-	- A generator creates an generator object, which is an iterator.
+	- A generator creates an generator object, which is a type of iterator.
 	- Whats special about generator function (object)?
 		generator function can yield multiple values
 
@@ -130,3 +154,12 @@ In the example above, we use "range" function. "range" creates an implicit seque
 	            yield e1
 	            e1 = next(i1)
 
++ Mind blow
+	What sequence is this?
+
+	def mistery:
+		yield 1
+		for i in mistery():
+			yield i + 1
+
+	answer: 1, 2, 3, 4 ..... Its a natural number series.
