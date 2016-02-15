@@ -53,14 +53,24 @@ synchronized (object) {
 
 2). Hoare-style Monitor:
 
-- process 0 takes over the execution
+- process 0 takes over the execution.
+- process 1 would fall out the critical section.
 
 ``` 
 	Process 0									Process 1
 	
-synchronized (object) {	if (x != 1)		object.wait();
-										synchronized (object) {											x=1;											object.notify();
-		assert(x==1); // x must be 1	x++; }										// x may no longer be 1 here;										}
+synchronized (object) {
+	if (x != 1)
+		object.wait();
+										synchronized (object) {
+											x=1;
+											object.notify();
+		assert(x==1); // x must be 1
+	x++; 
+}
+										// x may no longer be 1 here;
+										}
+
 ```
 
 3). Mesa Style (Java Style)
@@ -72,10 +82,18 @@ synchronized (object) {	if (x != 1)		object.wait();
 ``` 
 	Process 0									Process 1
 	
-synchronized (object) {	while (x != 1)	// Make sure x is 1		object.wait();
-										synchronized (object) {											x=1;											object.notify();
-											// x may no longer be 1 here;										}
-		assert(x==1);	x++; }										
+synchronized (object) {
+	while (x != 1)	// Make sure x is 1
+		object.wait();
+										synchronized (object) {
+											x=1;
+											object.notify();
+											// x may no longer be 1 here;
+										}
+		assert(x==1);
+	x++; 
+}
+										
 ```
 
 4). Nested monitors
@@ -84,11 +102,24 @@ This one would cause deadlock.
 
 
 ```
-synchronized (ObjA) { 	synchronized (ObjB) {		// Here Java only releases the monitor lock on ObjB 		// and not the monitor lock on ObjA.
-		ObjB.wait(); 	}}synchronized (ObjA) { 	synchronized (ObjB) {
+synchronized (ObjA) { 
+	synchronized (ObjB) {
+		// Here Java only releases the monitor lock on ObjB 
+		// and not the monitor lock on ObjA.
+		ObjB.wait(); 
+
+	}
+}
+
+
+synchronized (ObjA) { 
+	synchronized (ObjB) {
 		// Hence this piece of code will block 
 		// and will not reach ObjB.notify() – deadlock!
-				ObjB.notify();	}}
+		
+		ObjB.notify();
+	}
+}
 ```
 
 
