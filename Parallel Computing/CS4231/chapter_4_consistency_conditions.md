@@ -1,5 +1,11 @@
 #### Consistency Conditions
+<meta>Created 25/02/2015</meta>
+
 ---
+
+## Informal Definition
+The result is the same as if the operation of all processors were executed in some sequential order, and the operation of each indivisdual processor appear in this sequence in the order specified by the program.
+
 
 ## Some Definitions
 #### Operation:
