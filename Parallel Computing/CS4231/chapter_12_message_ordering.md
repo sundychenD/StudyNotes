@@ -47,7 +47,20 @@ Total ordering does not imply causal ordering.
 
  - E.G.
  - Let A send S1, S2 to all other process, and have then all been delivered as S2, S1. Total ordering here is been maintained but violate causal ordering.
+
+##### P.S.
+Mathematical definition of Total Order:
+
+"A relation satisfy a total order ona set S (<= total orders S)" if the following 4 properties hold
+
+1. Reflexivity: a <= a for all a ∈ S
+2. Antisymmetry: a <= b and b <= a implies a = b
+3. Transitivity: a <= b and b <= c implies a <= c
+4. Comparability: For any a, b ∈ S, either a <= b or b <= a
+
+The first 3 are the axioms of partial order, plus the last defines total order.
  
+
 #### Usage: Replicated State Machine
 
 - e.g. Database
