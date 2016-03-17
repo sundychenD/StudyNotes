@@ -72,6 +72,8 @@ The first 3 are the axioms of partial order, plus the last defines total order.
 
 #### Coordinator for Total Order Broadcast
 
+<b>We don't assume FIFO for the comunicating channel.</b>
+
 Let a process to be the coordinator, every other process would send their messages to coordinator and let it broadcast.
 
 Coordinator assign a sequence number to each message.
