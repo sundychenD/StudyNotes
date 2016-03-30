@@ -42,7 +42,7 @@ Disadvanatge:
 
 - Performance penalty occurring at loading time to run time. The first time a function is accessed, the library must be loaded from disc during execution. However it could be outweighed in the long run as it would other wise loaded by programs n time by each program.
 
-![Fig5.2](images/Chpt_5/Fig 5.2.png)
+![Fig5.2](Images/Chpt_5/Fig 5.2.png)
 
 #### 5.1.6 Page
 
